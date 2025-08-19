@@ -1,0 +1,63 @@
+# 操作系统生成的文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 编辑器和IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 日志文件
+*.log
+logs/
+
+# 临时文件
+*.tmp
+*.temp
+
+# 备份文件
+*.bak
+*.backup
+
+# 压缩文件
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# 本地配置文件（如果有的话）
+config.local.js
+.env.local
+
+# 测试覆盖率报告
+coverage/
+
+# 依赖目录（如果使用包管理器）
+node_modules/
+
+# 构建输出（如果有构建过程）
+dist/
+build/
+
+# 缓存目录
+.cache/
+
+# 用户上传的文件（如果有的话）
+uploads/
+images/generated/
+
+# 敏感信息（提醒用户不要提交）
+# 注意：API密钥应该通过应用界面配置，不要硬编码在文件中
+api-keys.txt
+secrets.json
+
+# 项目特定忽略
+# 忽略贪吃蛇项目的 Electron 版本文件夹
+贪吃蛇/Electron-version/

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 贪吃蛇游戏</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 游戏标题和信息栏 -->
+        <header class="game-header">
+            <h1>🐍 贪吃蛇游戏</h1>
+            <div class="game-info">
+                <div class="score-display">
+                    <span class="label">分数:</span>
+                    <span id="current-score">0</span>
+                </div>
+                <div class="high-score-display">
+                    <span class="label">最高分:</span>
+                    <span id="high-score">0</span>
+                </div>
+                <div class="difficulty-display">
+                    <span class="label">难度:</span>
+                    <span id="difficulty">普通</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 游戏画布区域 -->
+        <main class="game-main">
+            <div class="canvas-container">
+                <canvas id="game-canvas" width="600" height="400"></canvas>
+                <div id="game-overlay" class="game-overlay hidden">
+                    <div class="overlay-content">
+                        <h2 id="overlay-title">游戏开始</h2>
+                        <p id="overlay-message">按空格键开始游戏</p>
+                        <button id="start-button" class="btn btn-primary">开始游戏</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 控制按钮区域 -->
+        <footer class="game-controls">
+            <div class="control-buttons">
+                <button id="start-btn" class="btn btn-success">开始</button>
+                <button id="pause-btn" class="btn btn-warning">暂停</button>
+                <button id="reset-btn" class="btn btn-danger">重置</button>
+                <button id="settings-btn" class="btn btn-info">设置</button>
+            </div>
+            
+            <!-- 移动端虚拟方向键 -->
+            <div class="mobile-controls">
+                <div class="direction-pad">
+                    <button class="direction-btn up" data-direction="up">↑</button>
+                    <div class="direction-row">
+                        <button class="direction-btn left" data-direction="left">←</button>
+                        <button class="direction-btn right" data-direction="right">→</button>
+                    </div>
+                    <button class="direction-btn down" data-direction="down">↓</button>
+                </div>
+            </div>
+        </footer>
+
+        <!-- 游戏说明 -->
+        <div class="game-instructions">
+            <h3>游戏说明</h3>
+            <ul>
+                <li>使用方向键控制蛇的移动方向</li>
+                <li>吃到食物可以增加分数和蛇的长度</li>
+                <li>避免撞到墙壁或自己的身体</li>
+                <li>按空格键可以暂停/继续游戏</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 设置面板 -->
+    <div id="settings-panel" class="settings-panel hidden">
+        <div class="panel-content">
+            <h3>游戏设置</h3>
+            <div class="setting-group">
+                <label for="difficulty-select">难度选择:</label>
+                <select id="difficulty-select">
+                    <option value="very_slow" selected>非常慢</option>
+                    <option value="slow">慢</option>
+                    <option value="normal">普通</option>
+                    <option value="fast">快</option>
+                    <option value="very_fast">非常快</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label for="sound-toggle">音效:</label>
+                <input type="checkbox" id="sound-toggle" checked>
+            </div>
+            <div class="panel-buttons">
+                <button id="save-settings" class="btn btn-primary">保存</button>
+                <button id="cancel-settings" class="btn btn-secondary">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript文件 -->
+    <script src="js/utils.js"></script>
+    <script src="js/snake.js"></script>
+    <script src="js/food.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

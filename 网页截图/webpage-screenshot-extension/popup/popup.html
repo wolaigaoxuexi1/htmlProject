@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="popup.css">
+  <title>网页截图工具</title>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>📸 网页截图工具</h2>
+    </div>
+    
+    <div class="content">
+      <button id="captureBtn" class="capture-btn">
+        <span class="icon">🖼️</span>
+        <span class="text">截取完整页面</span>
+      </button>
+      
+      <div id="status" class="status hidden">
+        <div class="loading">
+          <div class="spinner"></div>
+          <span>正在截取中...</span>
+        </div>
+        <div class="progress-container">
+          <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+        </div>
+      </div>
+      
+      <div id="result" class="result hidden">
+        <p class="success">✅ 截图完成！</p>
+
+        <div class="preview-container">
+          <div class="preview-header">
+            <span>预览</span>
+            <button id="togglePreview" class="toggle-btn">展开</button>
+          </div>
+          <div id="previewArea" class="preview-area hidden">
+            <img id="previewImage" class="preview-image" alt="截图预览">
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button id="downloadBtn" class="download-btn">
+            <span>📥</span>
+            <span>下载图片</span>
+          </button>
+          <button id="copyBtn" class="copy-btn">
+            <span>📋</span>
+            <span>复制图片</span>
+          </button>
+        </div>
+      </div>
+      
+      <div id="error" class="error hidden">
+        <span class="error-icon">⚠️</span>
+        <span id="errorMessage">截图失败，请重试</span>
+        <button id="retryBtn" class="retry-btn">重试</button>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p class="tip">💡 点击按钮开始截取当前页面</p>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

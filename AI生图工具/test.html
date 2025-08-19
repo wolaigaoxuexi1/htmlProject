@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI生图工具 - 功能测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI生图工具 - 功能测试页面</h1>
+    
+    <div class="test-section">
+        <h2>1. 基础功能测试</h2>
+        <button onclick="testBasicFunctions()">运行基础功能测试</button>
+        <div id="basicTestResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. API功能测试</h2>
+        <input type="password" id="testApiKey" placeholder="输入API密钥进行测试">
+        <button onclick="testAPIFunctions()">测试API功能</button>
+        <div id="apiTestResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. UI交互测试</h2>
+        <button onclick="testUIInteractions()">测试UI交互</button>
+        <div id="uiTestResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. 本地存储测试</h2>
+        <button onclick="testLocalStorage()">测试本地存储</button>
+        <div id="storageTestResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>5. 响应式设计测试</h2>
+        <button onclick="testResponsiveDesign()">测试响应式设计</button>
+        <div id="responsiveTestResults"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>6. 性能测试</h2>
+        <button onclick="testPerformance()">运行性能测试</button>
+        <div id="performanceTestResults"></div>
+    </div>
+
+    <script>
+        // 加载主应用的脚本
+        function loadMainScripts() {
+            const scripts = [
+                'js/utils.js',
+                'js/api.js',
+                'js/ui.js',
+                'js/app.js'
+            ];
+
+            return Promise.all(scripts.map(src => {
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.onload = resolve;
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+            }));
+        }
+
+        // 显示测试结果
+        function showResult(containerId, message, type = 'success') {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.textContent = message;
+            container.appendChild(div);
+        }
+
+        // 清除测试结果
+        function clearResults(containerId) {
+            document.getElementById(containerId).innerHTML = '';
+        }
+
+        // 基础功能测试
+        function testBasicFunctions() {
+            clearResults('basicTestResults');
+            
+            try {
+                // 测试工具函数
+                if (typeof Storage !== 'undefined') {
+                    showResult('basicTestResults', '✓ Storage 工具类加载成功');
+                } else {
+                    showResult('basicTestResults', '✗ Storage 工具类加载失败', 'error');
+                }
+
+                if (typeof DOM !== 'undefined') {
+                    showResult('basicTestResults', '✓ DOM 工具类加载成功');
+                } else {
+                    showResult('basicTestResults', '✗ DOM 工具类加载失败', 'error');
+                }
+
+                if (typeof Validator !== 'undefined') {
+                    showResult('basicTestResults', '✓ Validator 工具类加载成功');
+                } else {
+                    showResult('basicTestResults', '✗ Validator 工具类加载失败', 'error');
+                }
+
+                // 测试验证函数
+                if (Validator.isValidPrompt('测试提示词')) {
+                    showResult('basicTestResults', '✓ 提示词验证功能正常');
+                } else {
+                    showResult('basicTestResults', '✗ 提示词验证功能异常', 'error');
+                }
+
+                if (Validator.isInRange(50, 1, 100)) {
+                    showResult('basicTestResults', '✓ 数值范围验证功能正常');
+                } else {
+                    showResult('basicTestResults', '✗ 数值范围验证功能异常', 'error');
+                }
+
+            } catch (error) {
+                showResult('basicTestResults', `✗ 基础功能测试出错: ${error.message}`, 'error');
+            }
+        }
+
+        // API功能测试
+        async function testAPIFunctions() {
+            clearResults('apiTestResults');
+            
+            try {
+                if (typeof api === 'undefined') {
+                    showResult('apiTestResults', '✗ API 模块未加载', 'error');
+                    return;
+                }
+
+                showResult('apiTestResults', '✓ API 模块加载成功');
+
+                // 测试API密钥验证
+                const testKey = document.getElementById('testApiKey').value;
+                if (testKey) {
+                    showResult('apiTestResults', '正在验证API密钥...', 'warning');
+                    try {
+                        const isValid = await api.validateApiKey(testKey);
+                        if (isValid) {
+                            showResult('apiTestResults', '✓ API密钥验证成功');
+                        } else {
+                            showResult('apiTestResults', '✗ API密钥验证失败', 'error');
+                        }
+                    } catch (error) {
+                        showResult('apiTestResults', `✗ API密钥验证出错: ${error.message}`, 'error');
+                    }
+                } else {
+                    showResult('apiTestResults', '请输入API密钥进行测试', 'warning');
+                }
+
+                // 测试参数验证
+                const testParams = {
+                    prompt: '测试提示词',
+                    image_size: '1024x1024',
+                    batch_size: 1,
+                    num_inference_steps: 20,
+                    guidance_scale: 7.5
+                };
+
+                try {
+                    api.validateParams(testParams);
+                    showResult('apiTestResults', '✓ 参数验证功能正常');
+                } catch (error) {
+                    showResult('apiTestResults', `✗ 参数验证功能异常: ${error.message}`, 'error');
+                }
+
+            } catch (error) {
+                showResult('apiTestResults', `✗ API功能测试出错: ${error.message}`, 'error');
+            }
+        }
+
+        // UI交互测试
+        function testUIInteractions() {
+            clearResults('uiTestResults');
+            
+            try {
+                if (typeof ui === 'undefined') {
+                    showResult('uiTestResults', '✗ UI 模块未加载', 'error');
+                    return;
+                }
+
+                showResult('uiTestResults', '✓ UI 模块加载成功');
+
+                // 测试DOM元素缓存
+                if (ui.elements && Object.keys(ui.elements).length > 0) {
+                    showResult('uiTestResults', '✓ DOM元素缓存正常');
+                } else {
+                    showResult('uiTestResults', '✗ DOM元素缓存异常', 'error');
+                }
+
+                // 测试表单验证
+                if (typeof ui.validateForm === 'function') {
+                    showResult('uiTestResults', '✓ 表单验证方法存在');
+                } else {
+                    showResult('uiTestResults', '✗ 表单验证方法不存在', 'error');
+                }
+
+                // 测试事件绑定
+                if (typeof ui.bindEvents === 'function') {
+                    showResult('uiTestResults', '✓ 事件绑定方法存在');
+                } else {
+                    showResult('uiTestResults', '✗ 事件绑定方法不存在', 'error');
+                }
+
+            } catch (error) {
+                showResult('uiTestResults', `✗ UI交互测试出错: ${error.message}`, 'error');
+            }
+        }
+
+        // 本地存储测试
+        function testLocalStorage() {
+            clearResults('storageTestResults');
+            
+            try {
+                // 测试localStorage可用性
+                if (typeof Storage !== 'undefined' && localStorage) {
+                    showResult('storageTestResults', '✓ localStorage 可用');
+                } else {
+                    showResult('storageTestResults', '✗ localStorage 不可用', 'error');
+                    return;
+                }
+
+                // 测试API密钥存储
+                const testKey = 'test_api_key_12345';
+                Storage.setApiKey(testKey);
+                const retrievedKey = Storage.getApiKey();
+                
+                if (retrievedKey === testKey) {
+                    showResult('storageTestResults', '✓ API密钥存储功能正常');
+                } else {
+                    showResult('storageTestResults', '✗ API密钥存储功能异常', 'error');
+                }
+
+                // 测试设置存储
+                const testSettings = {
+                    image_size: '512x512',
+                    batch_size: 2,
+                    num_inference_steps: 30
+                };
+                
+                Storage.saveDefaultSettings(testSettings);
+                const retrievedSettings = Storage.getDefaultSettings();
+                
+                if (retrievedSettings.image_size === testSettings.image_size) {
+                    showResult('storageTestResults', '✓ 设置存储功能正常');
+                } else {
+                    showResult('storageTestResults', '✗ 设置存储功能异常', 'error');
+                }
+
+                // 清理测试数据
+                Storage.setApiKey('');
+
+            } catch (error) {
+                showResult('storageTestResults', `✗ 本地存储测试出错: ${error.message}`, 'error');
+            }
+        }
+
+        // 响应式设计测试
+        function testResponsiveDesign() {
+            clearResults('responsiveTestResults');
+            
+            try {
+                // 测试CSS媒体查询支持
+                if (window.matchMedia) {
+                    showResult('responsiveTestResults', '✓ 媒体查询支持正常');
+                    
+                    // 测试不同断点
+                    const breakpoints = [
+                        { name: '移动设备', query: '(max-width: 768px)' },
+                        { name: '平板设备', query: '(max-width: 1024px)' },
+                        { name: '桌面设备', query: '(min-width: 1025px)' }
+                    ];
+                    
+                    breakpoints.forEach(bp => {
+                        const matches = window.matchMedia(bp.query).matches;
+                        showResult('responsiveTestResults', 
+                            `${bp.name}: ${matches ? '匹配' : '不匹配'}`, 
+                            matches ? 'success' : 'warning'
+                        );
+                    });
+                } else {
+                    showResult('responsiveTestResults', '✗ 媒体查询不支持', 'error');
+                }
+
+                // 测试视口设置
+                const viewport = document.querySelector('meta[name="viewport"]');
+                if (viewport) {
+                    showResult('responsiveTestResults', '✓ 视口设置正确');
+                } else {
+                    showResult('responsiveTestResults', '✗ 视口设置缺失', 'error');
+                }
+
+            } catch (error) {
+                showResult('responsiveTestResults', `✗ 响应式设计测试出错: ${error.message}`, 'error');
+            }
+        }
+
+        // 性能测试
+        function testPerformance() {
+            clearResults('performanceTestResults');
+            
+            try {
+                // 测试页面加载性能
+                if ('performance' in window) {
+                    showResult('performanceTestResults', '✓ Performance API 可用');
+                    
+                    const navigation = performance.getEntriesByType('navigation')[0];
+                    if (navigation) {
+                        const loadTime = navigation.loadEventEnd - navigation.loadEventStart;
+                        showResult('performanceTestResults', 
+                            `页面加载时间: ${loadTime.toFixed(2)}ms`,
+                            loadTime < 1000 ? 'success' : 'warning'
+                        );
+                    }
+                } else {
+                    showResult('performanceTestResults', '✗ Performance API 不可用', 'warning');
+                }
+
+                // 测试内存使用
+                if ('memory' in performance) {
+                    const memory = performance.memory;
+                    const usedMB = (memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
+                    showResult('performanceTestResults', 
+                        `内存使用: ${usedMB}MB`,
+                        usedMB < 50 ? 'success' : 'warning'
+                    );
+                } else {
+                    showResult('performanceTestResults', '内存信息不可用', 'warning');
+                }
+
+                // 测试网络状态
+                if ('navigator' in window && 'onLine' in navigator) {
+                    showResult('performanceTestResults', 
+                        `网络状态: ${navigator.onLine ? '在线' : '离线'}`,
+                        navigator.onLine ? 'success' : 'error'
+                    );
+                }
+
+            } catch (error) {
+                showResult('performanceTestResults', `✗ 性能测试出错: ${error.message}`, 'error');
+            }
+        }
+
+        // 页面加载完成后加载主应用脚本
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await loadMainScripts();
+                console.log('测试页面：主应用脚本加载完成');
+            } catch (error) {
+                console.error('测试页面：主应用脚本加载失败', error);
+            }
+        });
+    </script>
+</body>
+</html>
