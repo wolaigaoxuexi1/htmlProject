@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML项目集合</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .project-features li {
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .project-features li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .project-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+
+        .project-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .project-card {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>HTML项目集合</h1>
+            <p>精选的前端项目和工具</p>
+        </div>
+
+        <div class="projects-grid">
+            <!-- AI生图工具 -->
+            <div class="project-card">
+                <div class="project-icon">
+                    <i class="fas fa-magic" style="color: #6366f1;"></i>
+                </div>
+                <div class="project-title">AI生图工具</div>
+                <div class="project-description">
+                    基于硅基流动API的AI图像生成工具，支持文本到图片生成，提供多种参数调节选项。
+                </div>
+                <ul class="project-features">
+                    <li>支持中英文提示词</li>
+                    <li>多种图片尺寸选择</li>
+                    <li>实时参数调节</li>
+                    <li>一键下载功能</li>
+                    <li>响应式设计</li>
+                </ul>
+                <a href="AI生图工具/" class="project-button">
+                    <i class="fas fa-rocket"></i> 立即使用
+                </a>
+            </div>
+
+            <!-- 可以添加更多项目 -->
+            <div class="project-card" style="opacity: 0.6;">
+                <div class="project-icon">
+                    <i class="fas fa-plus" style="color: #94a3b8;"></i>
+                </div>
+                <div class="project-title">更多项目</div>
+                <div class="project-description">
+                    更多精彩的前端项目正在开发中，敬请期待...
+                </div>
+                <ul class="project-features">
+                    <li>即将推出</li>
+                    <li>敬请期待</li>
+                </ul>
+                <div class="project-button" style="background: #94a3b8; cursor: not-allowed;">
+                    <i class="fas fa-clock"></i> 开发中
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                <i class="fas fa-code"></i> 
+                使用现代Web技术构建 | 
+                <a href="https://github.com" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 添加一些交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为项目卡片添加点击统计
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // 如果点击的是按钮，不阻止默认行为
+                    if (e.target.classList.contains('project-button') || 
+                        e.target.closest('.project-button')) {
+                        return;
+                    }
+                    
+                    // 如果点击的是卡片其他区域，也跳转到项目
+                    const button = card.querySelector('.project-button');
+                    if (button && button.href) {
+                        window.location.href = button.href;
+                    }
+                });
+            });
+
+            // 添加页面加载动画
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // 添加鼠标跟随效果
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+                } else {
+                    card.style.transform = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

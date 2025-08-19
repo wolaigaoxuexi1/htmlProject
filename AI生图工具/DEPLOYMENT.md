@@ -58,11 +58,64 @@ php -S localhost:8000
 
 ## 在线部署
 
-### GitHub Pages
-1. 将项目上传到GitHub仓库
-2. 在仓库设置中启用GitHub Pages
-3. 选择主分支作为源
-4. 访问 `https://username.github.io/repository-name`
+### GitHub Pages（详细步骤）
+
+#### 方法一：通过仓库设置部署（推荐）
+
+1. **上传项目到GitHub**
+   ```bash
+   git add .
+   git commit -m "Add AI Image Generator"
+   git push origin main
+   ```
+
+2. **启用GitHub Pages**
+   - 进入GitHub仓库页面
+   - 点击 `Settings` 选项卡
+   - 在左侧菜单找到 `Pages`
+   - 在 "Source" 部分选择 `Deploy from a branch`
+   - Branch 选择 `main`，Folder 选择 `/ (root)`
+   - 点击 `Save` 按钮
+
+3. **等待部署完成**
+   - 部署通常需要2-5分钟
+   - 完成后会显示访问链接
+   - 链接格式：`https://username.github.io/repository-name`
+
+4. **验证部署**
+   - 访问生成的链接
+   - 确认所有功能正常工作
+   - 测试API调用是否正常
+
+#### 方法二：使用GitHub Actions（高级）
+
+1. **创建工作流文件**
+   - 在项目根目录创建 `.github/workflows/deploy.yml`
+   - 使用提供的工作流配置
+
+2. **启用GitHub Actions**
+   - 在仓库设置的 `Pages` 部分
+   - Source 选择 `GitHub Actions`
+   - 推送代码后自动触发部署
+
+#### 注意事项
+
+1. **HTTPS要求**
+   - GitHub Pages 自动提供HTTPS
+   - 确保API调用使用HTTPS
+
+2. **自定义域名（可选）**
+   - 在 `Pages` 设置中添加自定义域名
+   - 创建 `CNAME` 文件指向您的域名
+   - 配置DNS记录
+
+3. **缓存问题**
+   - 如果更新后看不到变化，清除浏览器缓存
+   - 或在URL后添加 `?v=timestamp` 强制刷新
+
+#### 示例访问链接
+- 如果用户名是 `yourname`，仓库名是 `ai-image-generator`
+- 访问链接：`https://yourname.github.io/ai-image-generator`
 
 ### Netlify
 1. 注册Netlify账户
